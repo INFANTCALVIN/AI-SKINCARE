@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skincare Chatbot</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e76f51;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #fff;
+            text-align: center;
+        }
+        
+        form {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Times New Roman', Times, serif;
+            outline: none;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #264653;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Times New Roman', Times, serif;
+            margin-left: 10px;
+        }
+        
+        button:hover {
+            background-color: #2a9d8f;
+            color:#fff;
+        }
+        
+        #response {
+            margin-top: 20px;
+            margin-left: 70px;
+            margin-right: 70px;
+            padding: 50px;
+            align-items: center;
+            background-color: #e9c46a;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        footer{
+            text-align: center;
+            font-size: 15px;
+            color:#fff;
+            font-family: 'Times New Roman', Times, serif;
+            padding-top:20%;
+        }
+            
+     </style>
+</head>
+<body>
+    <h1>SKINCARE CHATBOT!</h1>
+    <p style="text-align:center;font-size:20px;color:#fff">Welcome to Skincare Bot</p>
+    <form action="/chatbot" method="post">
+        <input type="text" name="user_input" placeholder="You can ask me anything about skincare.">
+        <button type="submit">Ask</button>
+    </form>
+    <div id="response">
+
+    <script>
+        const form = document.querySelector('form');
+        const responseDiv = document.getElementById('response');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const user_input = formData.get('user_input');
+
+            const response = await fetch('/chatbot', {
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            });
+
+            const responseData = await response.text();
+            responseDiv.innerText = responseData;
+        });
+    </script>
+</div>
+</body>
+<footer>
+    Copyright (c) 2023 AI SKINCARE All Rights Reserved
+</footer>
+</html>
